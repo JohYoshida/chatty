@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Message from './Message.jsx';
+import MessageSystem from './MessageSystem.jsx';
 
 class MessageList extends Component {
   render() {
@@ -9,13 +10,11 @@ class MessageList extends Component {
         username = { message.username }
         content = { message.content } />
     });
-    console.log("Rendering <MessageList/>");
+    console.log("Rendering <MessageList />");
     return (
       <main className="messages">
-        {messages}
-        <div className="message system">
-          Anonymous1 changed their name to nomnom.
-        </div>
+        { messages }
+        <MessageSystem systemMessage={ this.props.systemMessage }/>
       </main>
 
     );
