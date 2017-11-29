@@ -5,7 +5,7 @@ class MessageSystem extends Component {
     console.log("Rendering <MessageSystem />");
     return (
       <div className="message system">
-        { this.props.systemMessage }
+        {this.props.systemMessage}
       </div>
     );
   }
