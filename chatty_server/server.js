@@ -34,12 +34,6 @@ wss.on('connection', (ws) => {
     // parse message, add UUID, and broadcast
     message = JSON.parse(message)
     message.id = uuid();
-    // if (message.type === 'postMessage') {
-    //   message.type = 'incomingMessage';
-    //   console.log(`${message.username} says ${message.content}`);
-    // } else if (message.type === 'postNotification') {
-    //   message.type = 'incomingNotification';
-    // }
     switch(message.type) {
       case 'postMessage':
         message.type = 'incomingMessage';

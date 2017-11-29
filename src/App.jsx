@@ -25,23 +25,19 @@ class App extends Component {
 
     this.socket.onmessage = (event) => {
       const message = JSON.parse(event.data);
-
-      // if (message.type === 'incomingMessage') {
-      //   const messages = this.state.messages.concat(message);
-      //   this.setState({messages});
-      //   console.log(`${message.username} posted new message: ${message.content}`);
-      // } else if (message.type === 'incomingNotification') {
-      //   this.setState({username: message.username, systemMessage: message.content});
-      // }
       switch(message.type) {
-        case 'incomingMessage':
+        case 'incomingMessage': {
           const messages = this.state.messages.concat(message);
           this.setState({messages});
           break;
-        case 'incomingNotification':
+        }
+        case 'incomingNotification': {
           this.setState({username: message.username, systemMessage: message.content});
           break;
-
+        }
+        default: {
+          throw new Error('Unknown event type ' + message.type);
+        }
       }
 
     }
