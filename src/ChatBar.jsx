@@ -1,6 +1,12 @@
 import React, {Component} from 'react';
 
 class ChatBar extends Component {
+  constructor(props) {
+    super(props);
+    this.handleCurrentUser = this.handleCurrentUser.bind(this);
+    this.handleNewMessage = this.handleNewMessage.bind(this);
+  }
+
   handleCurrentUser(event) {
     if(event.key === 'Enter') {
       let username = event.target.value;
@@ -20,12 +26,6 @@ class ChatBar extends Component {
         event.target.value = '';
       }
     }
-  }
-
-  constructor(props) {
-    super(props);
-    this.handleCurrentUser = this.handleCurrentUser.bind(this);
-    this.handleNewMessage = this.handleNewMessage.bind(this);
   }
 
   render() {
