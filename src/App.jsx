@@ -25,9 +25,25 @@ class App extends Component {
 
     this.socket.onmessage = (event) => {
       const message = JSON.parse(event.data);
-      const messages = this.state.messages.concat(message);
-      this.setState({messages});
-      console.log(`${message.username} posted new message: ${message.content}`);
+
+      // if (message.type === 'incomingMessage') {
+      //   const messages = this.state.messages.concat(message);
+      //   this.setState({messages});
+      //   console.log(`${message.username} posted new message: ${message.content}`);
+      // } else if (message.type === 'incomingNotification') {
+      //   this.setState({username: message.username, systemMessage: message.content});
+      // }
+      switch(message.type) {
+        case 'incomingMessage':
+          const messages = this.state.messages.concat(message);
+          this.setState({messages});
+          break;
+        case 'incomingNotification':
+          this.setState({username: message.username, systemMessage: message.content});
+          break;
+
+      }
+
     }
   }
 
@@ -36,8 +52,15 @@ class App extends Component {
     if (!prevUsername) {
       prevUsername = 'Anonymous';
     }
-    this.setState({username: username, systemMessage: `${prevUsername} changed their name to ${username}`});
-    console.log(`${prevUsername} changed their name to ${username}`);
+    const message = {
+      type: 'postNotification',
+      username: username,
+      content: `${prevUsername} changed their name to ${username}`
+    }
+
+    this.socket.send(JSON.stringify(message))
+
+    // this.setState({username: username, systemMessage: message});
   }
 
   addMessage(text) {
@@ -46,7 +69,7 @@ class App extends Component {
       username = 'Anonymous';
     }
     const message = {
-      // id: this.state.messages.length + 1,
+      type: 'postMessage',
       username: username,
       content: text
     };

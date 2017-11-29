@@ -18,7 +18,7 @@ const wss = new ws.Server({ server });
 wss.broadcast = (data) => {
   wss.clients.forEach((client) => {
     if (client.readyState === ws.OPEN) {
-      console.log("Client's websocket is open");
+      console.log('Websocket is open');
       client.send(data);
     }
   });
@@ -34,9 +34,25 @@ wss.on('connection', (ws) => {
     // parse message, add UUID, and broadcast
     message = JSON.parse(message)
     message.id = uuid();
+    // if (message.type === 'postMessage') {
+    //   message.type = 'incomingMessage';
+    //   console.log(`${message.username} says ${message.content}`);
+    // } else if (message.type === 'postNotification') {
+    //   message.type = 'incomingNotification';
+    // }
+    switch(message.type) {
+      case 'postMessage':
+        message.type = 'incomingMessage';
+        console.log(`${message.username} says ${message.content}`);
+        break;
+      case 'postNotification':
+        message.type = 'incomingNotification';
+        console.log(message.content);
+        break;
+      default:
+        throw new Error('Unknown event type ' + message.type);
+    }
     wss.broadcast(JSON.stringify(message));
-
-    console.log(`${message.username} says ${message.content}`);
   });
 
 
