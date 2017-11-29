@@ -27,7 +27,7 @@ class App extends Component {
       const message = JSON.parse(event.data);
       const messages = this.state.messages.concat(message);
       this.setState({messages});
-      console.log(`${username} posted new message: ${message.content}`);
+      console.log(`${message.username} posted new message: ${message.content}`);
     }
   }
 
