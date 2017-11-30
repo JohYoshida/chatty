@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 class Message extends Component {
   render() {
-    console.log("Rendering <Message />");
+    console.log('Rendering <Message />');
     return (
     <div className="message">
       <span className="message-username" >{ this.props.username }</span>
@@ -10,5 +10,9 @@ class Message extends Component {
     </div>
     );
   }
+}
+Message.propTypes = {
+  username: React.PropTypes.string.isRequired,
+  content: React.PropTypes.string.isRequired
 }
 export default Message;

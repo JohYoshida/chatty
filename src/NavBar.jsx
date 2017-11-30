@@ -17,5 +17,7 @@ class NavBar extends Component {
     </nav>)
   }
 }
-
+NavBar.propTypes = {
+  userCount: React.PropTypes.number.isRequired
+}
 export default NavBar;

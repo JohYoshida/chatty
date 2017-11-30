@@ -33,9 +33,14 @@ class ChatBar extends Component {
     return (<footer className="chatbar">
       <input className="chatbar-username" placeholder={this.props.username
           ? this.props.username
-          : "Your Name (Optional)"} defaultValue={this.props.username} onKeyPress={this.handleNewUsername}/>
+          : 'Your Name (Optional)'} defaultValue={this.props.username} onKeyPress={this.handleNewUsername}/>
       <input className="chatbar-message" placeholder="Type a message and hit ENTER" onKeyPress={this.handleNewMessage}/>
     </footer>);
   }
+}
+ChatBar.propTypes = {
+  changeUsername: React.PropTypes.string.isRequired,
+  addMessage: React.PropTypes.string.isRequired,
+  username: React.PropTypes.string.isRequired
 }
 export default ChatBar;

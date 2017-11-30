@@ -7,11 +7,15 @@ class MessageList extends Component {
     const messages = this.props.messages.map((message) => {
       return <Message key={message.id} username={message.username} content={message.content}/>
     });
-    console.log("Rendering <MessageList />");
+    console.log('Rendering <MessageList />');
     return (<main className="messages">
       {messages}
       <MessageSystem systemMessage={this.props.systemMessage}/>
     </main>);
   }
+}
+MessageList.propTypes = {
+  messages: React.PropTypes.string.isRequired,
+  systemMessage: React.PropTypes.string.isRequired
 }
 export default MessageList;
