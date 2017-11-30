@@ -10,6 +10,7 @@ class App extends Component {
     this.socket = null;
     this.state = {
       username: '',
+      userCount: '',
       systemMessage: '',
       messages: []
     }
@@ -33,6 +34,11 @@ class App extends Component {
         }
         case 'incomingNotification': {
           this.setState({systemMessage: message.content});
+          break;
+        }
+        case 'incomingUserCount': {
+          console.log('Users:', message.userCount);
+          this.setState({userCount: message.userCount});
           break;
         }
         default: {
@@ -72,7 +78,7 @@ class App extends Component {
   render() {
     console.log('Rendering <App />');
     return (<div>
-      <NavBar />
+      <NavBar userCount={this.state.userCount}/>
       <ChatBar username={this.state.username} addMessage={this.addMessage} changeUsername={this.changeUsername}/>
       <MessageList messages={this.state.messages} systemMessage={this.state.systemMessage}/>
     </div>);
