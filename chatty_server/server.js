@@ -14,12 +14,38 @@ const server = express()
 // Create the WebSockets server
 const wss = new ws.Server({ server });
 
+// Create an array for holding users
+const users = [];
+
+// Create an array of colors
+const colors = [
+  '#B71C1C',
+  '#1A237E',
+  '#1B5E20',
+  '#F57F17'
+];
+
+function sendNewUser() {
+  const user = users[users.length - 1];
+  const message = {
+    type: 'incomingNewUser',
+    userColor: user.color,
+    userId: user.id
+  }
+  user.socket.send(JSON.stringify(message));
+}
+
 function broadcastUserCount() {
+  const user = users[users.length - 1];
   const message = {
     type: 'incomingUserCount',
     userCount: wss.clients.size
   }
   wss.broadcast(JSON.stringify(message));
+}
+
+function assignColor() {
+  return colors[Math.floor(Math.random() * (colors.length))];
 }
 
 // broadcast to all clients
@@ -38,7 +64,18 @@ wss.broadcast = (data) => {
 wss.on('connection', (ws) => {
   console.log('Client connected');
 
+  let user = {
+    socket: ws,
+    id: uuid(),
+    color: assignColor()
+  }
+
+  users.push(user);
+  sendNewUser();
   broadcastUserCount();
+  users.forEach(user => {
+    console.log('User', user.id, 'Color', user.color);
+  })
 
   ws.on('message', (message) => {
     // parse message, add UUID, and broadcast
@@ -62,9 +99,10 @@ wss.on('connection', (ws) => {
   // Set up a callback for when a client closes the socket. This usually means they closed their browser.
   ws.on('close', () => {
     console.log('Client disconnected');
+    users.pop();
     const message = {
       type: 'incomingUserCount',
-      userCount: wss.clients.size
+      userCount: wss.clients.size,
     }
     wss.broadcast(JSON.stringify(message));
   });

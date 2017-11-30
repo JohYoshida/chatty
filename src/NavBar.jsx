@@ -13,11 +13,11 @@ class NavBar extends Component {
       : 'users online'
     return (<nav className="navbar">
       <a href="/" className="navbar-brand">Chatty</a>
-    <p>{this.props.userCount} {message}</p>
+    <span className="user-count">{this.props.userCount} {message}</span>
     </nav>)
   }
 }
 NavBar.propTypes = {
-  userCount: React.PropTypes.number.isRequired
+  userCount: React.PropTypes.string.isRequired
 }
 export default NavBar;

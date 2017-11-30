@@ -39,8 +39,8 @@ class ChatBar extends Component {
   }
 }
 ChatBar.propTypes = {
-  changeUsername: React.PropTypes.string.isRequired,
-  addMessage: React.PropTypes.string.isRequired,
+  changeUsername: React.PropTypes.func.isRequired,
+  addMessage: React.PropTypes.func.isRequired,
   username: React.PropTypes.string.isRequired
 }
 export default ChatBar;

@@ -5,7 +5,8 @@ import MessageSystem from './MessageSystem.jsx';
 class MessageList extends Component {
   render() {
     const messages = this.props.messages.map((message) => {
-      return <Message key={message.id} username={message.username} content={message.content}/>
+      // console.log("color", message.color);
+      return <Message key={message.id} color={message.color} username={message.username} content={message.content}/>
     });
     console.log('Rendering <MessageList />');
     return (<main className="messages">
@@ -15,7 +16,7 @@ class MessageList extends Component {
   }
 }
 MessageList.propTypes = {
-  messages: React.PropTypes.string.isRequired,
+  messages: React.PropTypes.array.isRequired,
   systemMessage: React.PropTypes.string.isRequired
 }
 export default MessageList;

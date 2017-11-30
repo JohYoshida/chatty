@@ -10,6 +10,7 @@ class App extends Component {
     this.socket = null;
     this.state = {
       username: '',
+      userColor: '',
       userCount: '',
       systemMessage: '',
       messages: []
@@ -37,8 +38,11 @@ class App extends Component {
           break;
         }
         case 'incomingUserCount': {
-          console.log('Users:', message.userCount);
           this.setState({userCount: message.userCount});
+          break;
+        }
+        case 'incomingNewUser' : {
+          this.setState({userColor: message.userColor})
           break;
         }
         default: {
@@ -70,7 +74,8 @@ class App extends Component {
     const message = {
       type: 'postMessage',
       username: username,
-      content: text
+      content: text,
+      color: this.state.userColor
     };
     this.socket.send(JSON.stringify(message));
   }
