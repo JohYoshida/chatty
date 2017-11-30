@@ -32,7 +32,7 @@ class App extends Component {
           break;
         }
         case 'incomingNotification': {
-          this.setState({username: message.username, systemMessage: message.content});
+          this.setState({systemMessage: message.content});
           break;
         }
         default: {
@@ -56,7 +56,7 @@ class App extends Component {
 
     this.socket.send(JSON.stringify(message))
 
-    // this.setState({username: username, systemMessage: message});
+    this.setState({username: username, systemMessage: message});
   }
 
   addMessage(text) {
