@@ -4,7 +4,6 @@ import ChatBar from './ChatBar.jsx';
 import MessageList from './MessageList.jsx';
 
 class App extends Component {
-
   constructor(props) {
     super(props);
     this.socket = null;
@@ -25,7 +24,7 @@ class App extends Component {
 
     this.socket.onmessage = (event) => {
       const message = JSON.parse(event.data);
-      switch(message.type) {
+      switch (message.type) {
         case 'incomingMessage': {
           const messages = this.state.messages.concat(message);
           this.setState({messages});
@@ -39,7 +38,6 @@ class App extends Component {
           throw new Error('Unknown event type ' + message.type);
         }
       }
-
     }
   }
 
@@ -53,9 +51,7 @@ class App extends Component {
       username: username,
       content: `${prevUsername} changed their name to ${username}`
     }
-
     this.socket.send(JSON.stringify(message))
-
     this.setState({username: username, systemMessage: message});
   }
 
@@ -70,13 +66,6 @@ class App extends Component {
       content: text
     };
     this.socket.send(JSON.stringify(message));
-
-    // this.socket.onmessage = (event) => {
-    //   const message = JSON.parse(event.data);
-    //   const messages = this.state.messages.concat(message);
-    //   this.setState({messages});
-    //   console.log(`${username} posted new message: ${message.content}`);
-    // }
   }
 
   render() {
