@@ -77,6 +77,14 @@ body {
   position: fixed;
   right: 0;
   top: 0;
+
+  .user-count {
+    float: right;
+    font-weight: bold;
+    // font-size: 1.5em;
+    height: 60px;
+    line-height: 60px;
+  }
 }
 
 .navbar-brand {
