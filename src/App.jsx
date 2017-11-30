@@ -63,7 +63,7 @@ class App extends Component {
       content: `${prevUsername} changed their name to ${username}`
     }
     this.socket.send(JSON.stringify(message))
-    this.setState({username: username, systemMessage: message});
+    this.setState({username: username, systemMessage: message.content});
   }
 
   addMessage(text) {
@@ -81,7 +81,6 @@ class App extends Component {
   }
 
   render() {
-    console.log('Rendering <App />');
     return (<div>
       <NavBar userCount={this.state.userCount}/>
       <ChatBar username={this.state.username} addMessage={this.addMessage} changeUsername={this.changeUsername}/>

@@ -8,7 +8,6 @@ class MessageList extends Component {
       // console.log("color", message.color);
       return <Message key={message.id} color={message.color} username={message.username} content={message.content}/>
     });
-    console.log('Rendering <MessageList />');
     return (<main className="messages">
       {messages}
       <MessageSystem systemMessage={this.props.systemMessage}/>

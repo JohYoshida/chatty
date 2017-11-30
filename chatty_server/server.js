@@ -36,10 +36,9 @@ function sendNewUser() {
 }
 
 function broadcastUserCount() {
-  const user = users[users.length - 1];
   const message = {
     type: 'incomingUserCount',
-    userCount: wss.clients.size
+    userCount: wss.clients.size.toString()
   }
   wss.broadcast(JSON.stringify(message));
 }
@@ -64,7 +63,7 @@ wss.broadcast = (data) => {
 wss.on('connection', (ws) => {
   console.log('Client connected');
 
-  let user = {
+  const user = {
     socket: ws,
     id: uuid(),
     color: assignColor()
@@ -73,9 +72,6 @@ wss.on('connection', (ws) => {
   users.push(user);
   sendNewUser();
   broadcastUserCount();
-  users.forEach(user => {
-    console.log('User', user.id, 'Color', user.color);
-  })
 
   ws.on('message', (message) => {
     // parse message, add UUID, and broadcast
@@ -84,11 +80,9 @@ wss.on('connection', (ws) => {
     switch (message.type) {
       case 'postMessage':
         message.type = 'incomingMessage';
-        console.log(`${message.username} says ${message.content}`);
         break;
       case 'postNotification':
         message.type = 'incomingNotification';
-        console.log(message.content);
         break;
       default:
         throw new Error('Unknown event type ' + message.type);
@@ -100,10 +94,6 @@ wss.on('connection', (ws) => {
   ws.on('close', () => {
     console.log('Client disconnected');
     users.pop();
-    const message = {
-      type: 'incomingUserCount',
-      userCount: wss.clients.size,
-    }
-    wss.broadcast(JSON.stringify(message));
+    broadcastUserCount();
   });
 });
