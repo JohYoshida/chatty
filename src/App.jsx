@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 // import ReactDOM from 'react-dom';
+import NavBar from './NavBar.jsx';
 import ChatBar from './ChatBar.jsx';
 import MessageList from './MessageList.jsx';
 
@@ -71,6 +72,7 @@ class App extends Component {
   render() {
     console.log('Rendering <App />');
     return (<div>
+      <NavBar />
       <ChatBar username={this.state.username} addMessage={this.addMessage} changeUsername={this.changeUsername}/>
       <MessageList messages={this.state.messages} systemMessage={this.state.systemMessage}/>
     </div>);
