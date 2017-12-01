@@ -39,8 +39,7 @@ const colors = [
   '#795548',
   '#9E9E9E',
   '#607D8B',
-  '#000000',
-  '#FFFFFF',
+  '#000000'
 ];
 
 function sendNewUser() {
