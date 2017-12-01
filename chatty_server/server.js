@@ -51,7 +51,6 @@ function assignColor() {
 wss.broadcast = (data) => {
   wss.clients.forEach((client) => {
     if (client.readyState === ws.OPEN) {
-      console.log('Websocket is open');
       client.send(data);
     }
   });
