@@ -5,11 +5,11 @@ class NavBar extends Component {
     super(props);
   }
 
-
   render() {
-    const message = this.props.userCount === 1
+    console.log(this.props.userCount);
+    const message = (this.props.userCount === '1')
       ? 'user online'
-      : 'users online'
+      : 'users online';
     return (<nav className="navbar">
       <a href="/" className="navbar-brand">Chatty</a>
     <span className="user-count">{this.props.userCount} {message}</span>
