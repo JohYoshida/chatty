@@ -6,7 +6,6 @@ class NavBar extends Component {
   }
 
   render() {
-    console.log(this.props.userCount);
     const message = (this.props.userCount === '1')
       ? 'user online'
       : 'users online';
