@@ -31,6 +31,9 @@ Persistent user colors
 - webpack-dev-server: 2.3.0
 - react: 15.4.2
 - react-dom: 15.4.2
+- express: 4.16.2
+- uuid: ^3.1.0
+- ws: 3.3.2
 
 ### Built with:
 - React
