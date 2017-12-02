@@ -5,10 +5,13 @@ Chatty is a single-page web app built on ReactJS that allows you to send message
 ## Screenshots
 
 Change your username at any time
+
 !['Change your username'](https://github.com/JohYoshida/chatty/blob/master/data/change-username.png
 Supports multiple users
+
 !['Supports multiple users'](https://github.com/JohYoshida/chatty/blob/master/data/different-people.png)
 Persistent user colors
+
 !['Persistent user colors'](https://github.com/JohYoshida/chatty/blob/master/data/persistent.png)
 
 ## Dependencies
