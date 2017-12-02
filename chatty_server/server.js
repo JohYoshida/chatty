@@ -15,7 +15,7 @@ const server = express()
 const wss = new ws.Server({ server });
 
 // Create an array for holding users
-const users = [];
+const users = new Set();
 
 // Create an array of colors
 // https://material.io/guidelines/style/color.html#color-color-palette
@@ -42,8 +42,7 @@ const colors = [
   '#000000'
 ];
 
-function sendNewUser() {
-  const user = users[users.length - 1];
+function sendNewUser(user) {
   const message = {
     type: 'incomingNewUser',
     userColor: user.color,
@@ -85,8 +84,8 @@ wss.on('connection', (ws) => {
     color: assignColor()
   }
 
-  users.push(user);
-  sendNewUser();
+  users.add(user.id);
+  sendNewUser(user);
   broadcastUserCount();
 
   ws.on('message', (message) => {
@@ -109,7 +108,7 @@ wss.on('connection', (ws) => {
   // Set up a callback for when a client closes the socket. This usually means they closed their browser.
   ws.on('close', () => {
     console.log('Client disconnected');
-    users.pop();
+    users.delete(user.id)
     broadcastUserCount();
   });
 });
