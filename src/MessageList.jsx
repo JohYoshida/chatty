@@ -5,7 +5,6 @@ import MessageSystem from './MessageSystem.jsx';
 class MessageList extends Component {
   render() {
     const messages = this.props.messages.map((message) => {
-      // console.log("color", message.color);
       return <Message key={message.id} color={message.color} username={message.username} content={message.content}/>
     });
     return (<main className="messages">
