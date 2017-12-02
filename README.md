@@ -29,6 +29,8 @@ Persistent user colors
 - style-loader: 0.13.1
 - webpack: 2.2.1
 - webpack-dev-server: 2.3.0
+- react: 15.4.2
+- react-dom: 15.4.2
 
 ### Built with:
 - React
