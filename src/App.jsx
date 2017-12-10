@@ -81,10 +81,11 @@ class App extends Component {
   }
 
   render() {
+    const { userCount, username, messages, systemMessage } = this.state
     return (<div>
-      <NavBar userCount={this.state.userCount}/>
-      <ChatBar username={this.state.username} addMessage={this.addMessage} changeUsername={this.changeUsername}/>
-      <MessageList messages={this.state.messages} systemMessage={this.state.systemMessage}/>
+      <NavBar userCount={userCount}/>
+      <ChatBar username={username} addMessage={this.addMessage} changeUsername={this.changeUsername}/>
+      <MessageList messages={messages} systemMessage={systemMessage}/>
     </div>);
   }
 }
