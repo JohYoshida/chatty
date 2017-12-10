@@ -7,6 +7,7 @@ class ChatBar extends Component {
     this.handleNewMessage = this.handleNewMessage.bind(this);
   }
 
+  // Add new username to props
   handleNewUsername(event) {
     if (event.key === 'Enter') {
       let username = event.target.value;
@@ -17,6 +18,7 @@ class ChatBar extends Component {
     }
   }
 
+  // Add message text to props
   handleNewMessage(event) {
     // on keypress ENTER
     if (event.key === 'Enter') {

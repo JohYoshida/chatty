@@ -20,13 +20,16 @@ class App extends Component {
   }
 
   componentDidMount() {
+    // Connect to server
     this.socket = new WebSocket('ws://localhost:3001');
     this.socket.addEventListener('open', () => {
       console.log('Connected to server');
     });
 
+    // Message event
     this.socket.onmessage = (event) => {
       const message = JSON.parse(event.data);
+      // Set state based on message type
       switch (message.type) {
         case 'incomingMessage': {
           const messages = this.state.messages.concat(message);
@@ -52,6 +55,7 @@ class App extends Component {
     }
   }
 
+  // Construct and send message containing new username
   changeUsername(username) {
     let prevUsername = this.state.username;
     if (!prevUsername) {
@@ -66,6 +70,7 @@ class App extends Component {
     this.setState({username: username, systemMessage: message.content});
   }
 
+  // Construct and send message containing user's text
   addMessage(text) {
     let username = this.state.username;
     if (!username) {
